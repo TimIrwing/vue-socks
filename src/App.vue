@@ -39,6 +39,7 @@ export default {
       product: 'Socks',
       inventory: 30,
       imageSrc: greenSocks,
+      onSale: true,
     };
   },
 };
