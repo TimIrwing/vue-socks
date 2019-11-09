@@ -68,8 +68,8 @@
 </template>
 
 <script>
-import greenSocks from './assets/vmSocks-green-onWhite.jpg';
-import blueSocks from './assets/vmSocks-blue-onWhite.jpg';
+import greenSocks from './assets/greenSocks.jpg';
+import blueSocks from './assets/blueSocks.jpg';
 
 export default {
   name: 'App',
