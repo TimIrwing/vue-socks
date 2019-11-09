@@ -3,7 +3,7 @@
     <section class="product">
       <div class="product-image">
         <img
-          src="./assets/vmSocks-green-onWhite.jpg"
+          :src="imageSrc"
           alt="Socks"
         >
       </div>
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import greenSocks from './assets/vmSocks-green-onWhite.jpg';
+
 export default {
   name: 'App',
   components: {
@@ -27,7 +29,7 @@ export default {
         name: 'Socks',
         desc: "Good ol' socks",
       },
-      image: 'vmSocks-green-onWhite.jpg',
+      imageSrc: greenSocks,
     };
   },
 };
