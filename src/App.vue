@@ -31,25 +31,37 @@
         </ul>
 
 
-        <ul>
+        <ul class="buttonList">
           <li
-            v-for="variant in variants"
+            v-for="(variant, i) in variants"
             :key="variant.id">
-            <button type="button">
+
+            <label
+              class="colorBtn"
+              @click="updateProduct(variant)">
+              <input type="radio" name="color" :checked="i === 0">
+              <div class="colorBtn_inside" :style="{backgroundColor: variant.bgColor}"></div>
               {{ variant.color }}
-            </button>
+            </label>
           </li>
         </ul>
 
-        <ul>
+        <ul class="buttonList">
           <li
             v-for="size in sizes"
             :key="size">
-            <button type="button">
+            <label>
+               <input type="radio" name="size">
               {{ size }}
-            </button>
+            </label>
           </li>
         </ul>
+
+        <button class="toCart" v-on:click="addToCart">Add to Cart</button>
+
+        <div class="cart">
+          <p>Cart ({{cart.length}})</p>
+        </div>
       </div>
     </section>
   </div>
@@ -57,6 +69,7 @@
 
 <script>
 import greenSocks from './assets/vmSocks-green-onWhite.jpg';
+import blueSocks from './assets/vmSocks-blue-onWhite.jpg';
 
 export default {
   name: 'App',
@@ -70,16 +83,42 @@ export default {
       onSale: true,
       details: ['80% cotton', '20% polyester'],
       variants: [
-        { id: 2234, color: 'green' },
-        { id: 2235, color: 'blue' },
+        {
+          id: 2234,
+          color: 'green',
+          bgColor: '#359264',
+          image: greenSocks,
+        },
+        {
+          id: 2235,
+          color: 'blue',
+          bgColor: '#405267',
+          image: blueSocks,
+        },
       ],
       sizes: ['XS', 'S', 'M', 'L', 'XL'],
+      cart: [],
+
     };
+  },
+  methods: {
+    addToCart() {
+      this.cart.push('');
+    },
+    updateProduct(variant) {
+      this.imageSrc = variant.image;
+    },
   },
 };
 </script>
 
 <style>
+    body {
+        font-family: tahoma, sans-serif;
+        color:#282828;
+        margin: 0;
+    }
+
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -93,6 +132,16 @@ export default {
       padding: 1rem;
     }
 
+    .buttonList {
+      padding: 0;
+      display: flex;
+      list-style: none;
+    }
+
+    .buttonList > *:not(:last-child) {
+      margin-right: .5em;
+    }
+
     img {
       border: 1px solid #d8d8d8;
       width: 70%;
@@ -102,6 +151,57 @@ export default {
 
     .product-image {
       width: 80%;
+    }
+
+    .colorBtn {
+      display: block;
+      position: relative;
+      color: #0000;
+      width: 3em;
+      height: 3em;
+      border: 1px solid #3336;
+      border-radius: .5em;
+    }
+
+
+    .colorBtn_inside {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: .25em;
+      width: 1.25em;
+      height: 1.25em;
+    }
+
+    input[type=radio]:checked ~ .colorBtn_inside {
+      width: 2.25em;
+      height: 2.25em;
+    }
+
+    .colorBtn > input[type=radio] {
+      visibility: hidden;
+    }
+
+    .cart {
+         margin-right: 25px;
+         float: right;
+         border: 1px solid #d8d8d8;
+         padding: 5px 20px;
+    }
+
+    .toCart {
+      margin-top: 30px;
+      border: none;
+      background-color: #1E95EA;
+      color: white;
+      height: 40px;
+      width: 100px;
+      font-size: 14px;
+    }
+
+    .toCart__disabled {
+      background-color: #d8d8d8;
     }
 
     .product-image,
