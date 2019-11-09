@@ -33,19 +33,27 @@
         </ul>
 
 
-        <div
-          v-for="variant in variants"
-          :key="variant.id"
-        >
-          <p>{{ variant.color }}</p>
-        </div>
+        <ul>
+          <li
+            v-for="variant in variants"
+            :key="variant.id"
+          >
+            <button type="button">
+              {{ variant.color }}
+            </button>
+          </li>
+        </ul>
 
-        <div
-          v-for="size in sizes"
-          :key="size"
-        >
-          <p>{{ size }}</p>
-        </div>
+        <ul>
+          <li
+            v-for="size in sizes"
+            :key="size"
+          >
+            <button type="button">
+              {{ size }}
+            </button>
+          </li>
+        </ul>
       </div>
     </section>
   </div>
