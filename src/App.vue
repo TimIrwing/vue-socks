@@ -32,16 +32,16 @@
 
 
         <ul class="buttonList">
-          <li
-            v-for="(variant, i) in variants"
-            :key="variant.id">
+          <li v-for="(variant, i) in variants"
+              :key="variant.id">
 
-            <label
-              class="colorBtn"
-              @click="updateProduct(variant)">
-              <input type="radio" name="color" :checked="i === 0">
-              <div class="colorBtn_inside" :style="{backgroundColor: variant.bgColor}"></div>
-              {{ variant.color }}
+            <label class="colorBtn">
+              <input type="radio"
+                     name="color"
+                     :checked="i === 0"
+                     @input="updateProduct(variant)">
+              <div class="colorBtn__inside" :style="{backgroundColor: variant.bgColor}"></div>
+              <span class="colorBtn__desc">{{ variant.color }}</span>
             </label>
           </li>
         </ul>
@@ -156,15 +156,21 @@ export default {
     .colorBtn {
       display: block;
       position: relative;
-      color: #0000;
       width: 3em;
       height: 3em;
       border: 1px solid #3336;
       border-radius: .5em;
     }
 
+    .colorBtn__desc {
+      position: absolute;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      height: 1px; width: 1px;
+      margin: -1px; padding: 0; border: 0;
+    }
 
-    .colorBtn_inside {
+    .colorBtn__inside {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -174,7 +180,7 @@ export default {
       height: 1.25em;
     }
 
-    input[type=radio]:checked ~ .colorBtn_inside {
+    input[type=radio]:checked ~ .colorBtn__inside {
       width: 2.25em;
       height: 2.25em;
     }
