@@ -22,6 +22,30 @@
         <p v-show="inventory <= 0">
           Out of Stock
         </p>
+
+        <ul>
+          <li
+            v-for="detail in details"
+            :key="detail"
+          >
+            {{ detail }}
+          </li>
+        </ul>
+
+
+        <div
+          v-for="variant in variants"
+          :key="variant.id"
+        >
+          <p>{{ variant.color }}</p>
+        </div>
+
+        <div
+          v-for="size in sizes"
+          :key="size"
+        >
+          <p>{{ size }}</p>
+        </div>
       </div>
     </section>
   </div>
@@ -40,6 +64,12 @@ export default {
       inventory: 30,
       imageSrc: greenSocks,
       onSale: true,
+      details: ['80% cotton', '20% polyester'],
+      variants: [
+        { id: 2234, color: 'green' },
+        { id: 2235, color: 'blue' },
+      ],
+      sizes: ['XS', 'S', 'M', 'L', 'XL'],
     };
   },
 };
