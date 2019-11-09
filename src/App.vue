@@ -4,8 +4,7 @@
       <div class="product-image">
         <img
           :src="imageSrc"
-          alt="Socks"
-        >
+          alt="Socks">
       </div>
 
       <div class="product-info">
@@ -26,8 +25,7 @@
         <ul>
           <li
             v-for="detail in details"
-            :key="detail"
-          >
+            :key="detail">
             {{ detail }}
           </li>
         </ul>
@@ -36,8 +34,7 @@
         <ul>
           <li
             v-for="variant in variants"
-            :key="variant.id"
-          >
+            :key="variant.id">
             <button type="button">
               {{ variant.color }}
             </button>
@@ -47,8 +44,7 @@
         <ul>
           <li
             v-for="size in sizes"
-            :key="size"
-          >
+            :key="size">
             <button type="button">
               {{ size }}
             </button>
