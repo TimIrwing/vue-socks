@@ -11,13 +11,15 @@
       <div class="product-info">
         <h1>{{ product }}</h1>
 
-        <p v-if="inventory > 10">
+        <span v-if="onSale">On Sale!</span>
+
+        <p v-show="inventory > 10">
           In Stock
         </p>
-        <p v-else-if="inventory <= 10 && inventory > 0">
+        <p v-show="inventory <= 10 && inventory > 0">
           Almost sold out!
         </p>
-        <p v-else>
+        <p v-show="inventory <= 0">
           Out of Stock
         </p>
       </div>
@@ -35,7 +37,7 @@ export default {
   data() {
     return {
       product: 'Socks',
-      inventory: 0,
+      inventory: 30,
       imageSrc: greenSocks,
     };
   },
