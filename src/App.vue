@@ -1,7 +1,18 @@
 <template>
   <div id="app">
-    <h1>{{ product.name }}</h1>
-    <p>{{ product.desc }}</p>
+    <section class="product">
+      <div class="product-image">
+        <img
+          src="./assets/vmSocks-green-onWhite.jpg"
+          alt="Socks"
+        >
+      </div>
+
+      <div class="product-info">
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.desc }}</p>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -16,6 +27,7 @@ export default {
         name: 'Socks',
         desc: "Good ol' socks",
       },
+      image: 'vmSocks-green-onWhite.jpg',
     };
   },
 };
