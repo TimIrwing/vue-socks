@@ -9,8 +9,17 @@
       </div>
 
       <div class="product-info">
-        <h1>{{ product.name }}</h1>
-        <p>{{ product.desc }}</p>
+        <h1>{{ product }}</h1>
+
+        <p v-if="inventory > 10">
+          In Stock
+        </p>
+        <p v-else-if="inventory <= 10 && inventory > 0">
+          Almost sold out!
+        </p>
+        <p v-else>
+          Out of Stock
+        </p>
       </div>
     </section>
   </div>
@@ -25,10 +34,8 @@ export default {
   },
   data() {
     return {
-      product: {
-        name: 'Socks',
-        desc: "Good ol' socks",
-      },
+      product: 'Socks',
+      inventory: 0,
       imageSrc: greenSocks,
     };
   },
