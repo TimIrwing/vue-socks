@@ -3,25 +3,25 @@
     <section class="product">
       <div class="product-image">
         <img
-          :src="imageSrc"
+          :src="product.imageSrc"
           alt="Socks">
       </div>
 
       <div class="product-info">
         <h1>
-          {{ product }}
-          <span class="sale" v-show="onSale">On Sale!</span>
+          {{ product.name }}
+          <span class="sale" v-show="product.onSale">On Sale!</span>
         </h1>
 
 
         <p>
-          <span v-show="inventory > 10">
+          <span v-show="product.inventory > 10">
             In Stock
           </span>
-          <span v-show="inventory <= 10 && inventory > 0">
+          <span v-show="product.inventory <= 10 && product.inventory > 0">
             Almost sold out!
           </span>
-          <span v-show="inventory <= 0">
+          <span v-show="product.inventory <= 0">
             Out of Stock
           </span>
         </p>
@@ -42,9 +42,9 @@
             <label class="colorBtn">
               <input type="radio"
                      name="color"
-                     :checked="color === variant.color"
+                     :checked="product.color === variant.color"
                      @change="updateProduct(variant)">
-              <div class="colorBtn__inside" :style="{backgroundColor: variant.bgColor}"></div>
+              <span class="colorBtn__inside" :style="{ backgroundColor: variant.bgColor }"></span>
               <span class="colorBtn__desc">{{ variant.color }}</span>
             </label>
           </li>
@@ -81,14 +81,10 @@ export default {
   },
   data() {
     return {
-      product: 'Socks',
       details: ['80% cotton', '20% polyester'],
-      id: 2234,
-      color: 'green',
-      bgColor: '#359264',
-      imageSrc: greenSocks,
-      inventory: 6,
-      onSale: true,
+      product: {
+        name: 'Socks',
+      },
       variants: [
         {
           id: 2234,
@@ -109,17 +105,17 @@ export default {
       ],
       sizes: ['XS', 'S', 'M', 'L', 'XL'],
       cart: [],
-
     };
   },
+  created() {
+    this.updateProduct(this.variants[0]);
+  },
   methods: {
+    updateProduct(variant) {
+      this.product = { ...this.product, ...variant };
+    },
     addToCart() {
       this.cart.push('');
-    },
-    updateProduct(variant) {
-      Object.keys(variant).forEach((key) => {
-        this[key] = variant[key];
-      });
     },
   },
 };
