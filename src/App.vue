@@ -8,18 +8,22 @@
       </div>
 
       <div class="product-info">
-        <h1>{{ product }}</h1>
+        <h1>
+          {{ product }}
+          <span class="sale" v-show="onSale">On Sale!</span>
+        </h1>
 
-        <span v-if="onSale">On Sale!</span>
 
-        <p v-show="inventory > 10">
-          In Stock
-        </p>
-        <p v-show="inventory <= 10 && inventory > 0">
-          Almost sold out!
-        </p>
-        <p v-show="inventory <= 0">
-          Out of Stock
+        <p>
+          <span v-show="inventory > 10">
+            In Stock
+          </span>
+          <span v-show="inventory <= 10 && inventory > 0">
+            Almost sold out!
+          </span>
+          <span v-show="inventory <= 0">
+            Out of Stock
+          </span>
         </p>
 
         <ul>
@@ -32,14 +36,14 @@
 
 
         <ul class="buttonList">
-          <li v-for="(variant, i) in variants"
+          <li v-for="variant in variants"
               :key="variant.id">
 
             <label class="colorBtn">
               <input type="radio"
                      name="color"
-                     :checked="i === 0"
-                     @input="updateProduct(variant)">
+                     :checked="color === variant.color"
+                     @change="updateProduct(variant)">
               <div class="colorBtn__inside" :style="{backgroundColor: variant.bgColor}"></div>
               <span class="colorBtn__desc">{{ variant.color }}</span>
             </label>
@@ -78,22 +82,29 @@ export default {
   data() {
     return {
       product: 'Socks',
-      inventory: 30,
-      imageSrc: greenSocks,
-      onSale: true,
       details: ['80% cotton', '20% polyester'],
+      id: 2234,
+      color: 'green',
+      bgColor: '#359264',
+      imageSrc: greenSocks,
+      inventory: 6,
+      onSale: true,
       variants: [
         {
           id: 2234,
           color: 'green',
           bgColor: '#359264',
-          image: greenSocks,
+          imageSrc: greenSocks,
+          inventory: 6,
+          onSale: true,
         },
         {
           id: 2235,
           color: 'blue',
           bgColor: '#405267',
-          image: blueSocks,
+          imageSrc: blueSocks,
+          inventory: 48,
+          onSale: false,
         },
       ],
       sizes: ['XS', 'S', 'M', 'L', 'XL'],
@@ -106,24 +117,36 @@ export default {
       this.cart.push('');
     },
     updateProduct(variant) {
-      this.imageSrc = variant.image;
+      Object.keys(variant).forEach((key) => {
+        this[key] = variant[key];
+      });
     },
   },
 };
 </script>
 
 <style>
+    .sale {
+      color: #f3f3f3;
+      background-color: #F2341B;
+      vertical-align: baseline;
+      font-size: .8em;
+      padding: .3em .4em .1em .4em;
+      border-radius: .2em;
+      box-sizing: border-box;
+    }
+
     body {
-        font-family: tahoma, sans-serif;
-        color:#282828;
-        margin: 0;
+      font-family: tahoma, sans-serif;
+      color:#282828;
+      margin: 0;
     }
 
     #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        color: #233346;
+      font-family: 'Avenir', Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color: #233346;
     }
 
     .product {
@@ -190,10 +213,10 @@ export default {
     }
 
     .cart {
-         margin-right: 25px;
-         float: right;
-         border: 1px solid #d8d8d8;
-         padding: 5px 20px;
+      margin-right: 25px;
+      float: right;
+      border: 1px solid #d8d8d8;
+      padding: 5px 20px;
     }
 
     .toCart {
