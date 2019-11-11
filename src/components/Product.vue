@@ -163,7 +163,7 @@ export default {
     cursor: pointer;
   }
   .squareButton:focus-within {
-    border-color: transparent;
+    border-color: #4fc88c;
     box-shadow: 0 0 0 3px #4fc88c;
   }
 
