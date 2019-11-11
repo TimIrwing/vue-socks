@@ -117,6 +117,12 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  @media all and (max-width: 650px) {
+    .product {
+      flex-direction: column;
+    }
+  }
+
   .product-image,
   .product-info {
     width: 50%;
@@ -128,6 +134,16 @@ export default {
     border: 2px solid #d8d8d8;
     border-radius: 4px;
     box-shadow: 0 10px 4px -8px #d8d8d8;
+  }
+  @media all and (max-width: 650px) {
+    .product-image,
+    .product-info {
+      width: 100%;
+    }
+    img {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
   }
 
   .sale {
@@ -211,7 +227,7 @@ export default {
   }
 
   .toCart {
-    margin-top: 2em;
+    margin-top: 30px;
     border: none;
     border-radius: 2px;
     background-color: #4e7891;
@@ -227,5 +243,10 @@ export default {
   }
   .toCart:disabled {
     background-color: #9b9b9b;
+  }
+  @media all and (max-width: 650px) {
+    .toCart {
+      font-size: 1.5em;
+    }
   }
 </style>
