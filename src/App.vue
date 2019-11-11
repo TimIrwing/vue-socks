@@ -13,15 +13,14 @@
           <span class="sale" v-show="product.onSale">On Sale!</span>
         </h1>
 
-
         <p>
-          <span v-show="product.inventory > 10">
+          <span v-show="inventory > 25">
             In Stock
           </span>
-          <span v-show="product.inventory <= 10 && product.inventory > 0">
+          <span v-show="inventory <= 25 && inventory > 0">
             Almost sold out!
           </span>
-          <span v-show="product.inventory <= 0">
+          <span v-show="inventory <= 0">
             Out of Stock
           </span>
         </p>
@@ -53,16 +52,20 @@
 
         <ul class="buttonList">
           <li
-            v-for="size in sizes"
-            :key="size">
+            v-for="(val, key) in product.sizes"
+            :key="key">
             <label>
-               <input type="radio" name="size">
-              {{ size }}
+               <input type="radio" name="size" @change="size = key">
+              {{ key }}
             </label>
           </li>
         </ul>
 
-        <button class="toCart" v-on:click="addToCart">Add to Cart</button>
+        <button class="toCart"
+                v-on:click="addToCart"
+                :disabled="!size || product.sizes[size] <= 0">
+          Add to Cart
+        </button>
 
         <div class="cart">
           <p>Cart ({{cart.length}})</p>
@@ -86,27 +89,39 @@ export default {
       product: {
         name: 'Socks',
       },
+      size: '',
       variants: [
         {
           id: 2234,
           color: 'mint green',
           bgColor: '#359264',
           imageSrc: greenSocks,
-          inventory: 6,
           onSale: true,
+          sizes: {
+            S: 3, M: 7, L: 4, XL: 2,
+          },
         },
         {
           id: 2235,
           color: 'dark blue',
           bgColor: '#405267',
           imageSrc: blueSocks,
-          inventory: 48,
+          sizes: {
+            XS: 2, S: 6, M: 15, XL: 9,
+          },
           onSale: false,
         },
       ],
-      sizes: ['XS', 'S', 'M', 'L', 'XL'],
+      defaultSizes: {
+        XS: 0, S: 0, M: 0, L: 0, XL: 0,
+      },
       cart: [],
     };
+  },
+  computed: {
+    inventory() {
+      return Object.keys(this.product.sizes).reduce((acc, key) => acc + this.product.sizes[key], 0);
+    },
   },
   created() {
     this.updateProduct(this.variants[0]);
@@ -114,6 +129,7 @@ export default {
   methods: {
     updateProduct(variant) {
       this.product = { ...this.product, ...variant };
+      this.product.sizes = { ...this.defaultSizes, ...this.product.sizes };
     },
     addToCart() {
       this.cart.push('');
