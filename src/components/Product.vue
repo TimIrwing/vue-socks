@@ -171,7 +171,6 @@ export default {
     align-items: center;
     overflow: hidden;
     box-sizing: border-box;
-    position: relative;
     width: 3em;
     height: 3em;
     border: 1px solid #3336;
@@ -194,7 +193,7 @@ export default {
     border-radius: .333em;
   }
 
-  input[type=radio]:checked ~ .colorBtn__inside {
+  input[type=radio]:checked + .colorBtn__inside {
     width: 75%;
     height: 75%;
   }
@@ -207,7 +206,7 @@ export default {
     align-items: center;
   }
 
-  input[type=radio]:checked ~ .sizeBtn__text {
+  input[type=radio]:checked + .sizeBtn__text {
     background-color: #4fc88c77;
     font-size: 1.3em;
   }
