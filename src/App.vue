@@ -46,7 +46,7 @@
                      class="visuallyhidden"
                      :checked="product.color === variant.color"
                      @change="updateProduct(variant)">
-              <span class="colorBtn__inside" :style="{ backgroundColor: variant.bgColor }"></span>
+              <span class="colorBtn__inside" :style="{'background-color': variant.bgColor}"></span>
             </label>
           </li>
         </ul>
