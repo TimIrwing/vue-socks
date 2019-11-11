@@ -39,13 +39,14 @@
           <li v-for="variant in variants"
               :key="variant.id">
 
-            <label class="colorBtn">
+            <label class="colorBtn"
+                   :aria-label="variant.color">
               <input type="radio"
                      name="color"
+                     class="visuallyhidden"
                      :checked="product.color === variant.color"
                      @change="updateProduct(variant)">
               <span class="colorBtn__inside" :style="{ backgroundColor: variant.bgColor }"></span>
-              <span class="colorBtn__desc">{{ variant.color }}</span>
             </label>
           </li>
         </ul>
@@ -88,7 +89,7 @@ export default {
       variants: [
         {
           id: 2234,
-          color: 'green',
+          color: 'mint green',
           bgColor: '#359264',
           imageSrc: greenSocks,
           inventory: 6,
@@ -96,7 +97,7 @@ export default {
         },
         {
           id: 2235,
-          color: 'blue',
+          color: 'dark blue',
           bgColor: '#405267',
           imageSrc: blueSocks,
           inventory: 48,
@@ -173,20 +174,13 @@ export default {
     }
 
     .colorBtn {
+      cursor: pointer;
       display: block;
       position: relative;
       width: 3em;
       height: 3em;
       border: 1px solid #3336;
       border-radius: .5em;
-    }
-
-    .colorBtn__desc {
-      position: absolute;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-      height: 1px; width: 1px;
-      margin: -1px; padding: 0; border: 0;
     }
 
     .colorBtn__inside {
@@ -204,8 +198,24 @@ export default {
       height: 2.25em;
     }
 
-    .colorBtn > input[type=radio] {
-      visibility: hidden;
+    input[type=radio]:focus ~ .colorBtn__inside::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width: 145%;
+      height: 145%;
+      border-radius: 15%;
+      box-sizing: border-box;
+      border: 3px solid #4fc88c;
+    }
+    .visuallyhidden {
+      position: absolute;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      height: 1px; width: 1px;
+      margin: -1px; padding: 0; border: 0;
     }
 
     .cart {
@@ -225,7 +235,7 @@ export default {
       font-size: 14px;
     }
 
-    .toCart__disabled {
+    .toCart:disabled {
       background-color: #d8d8d8;
     }
 
