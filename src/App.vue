@@ -55,11 +55,12 @@
             v-for="(count, key) in product.sizes"
             :key="key">
             <label>
-               <input type="radio" name="size" @change="size = key">
+               <input type="radio" name="size" @change="size = key" :checked="size === key">
               {{ key }}
             </label>
           </li>
         </ul>
+        <p>{{ modelCount }} pieces available</p>
 
         <button class="toCart"
                 v-on:click="addToCart"
@@ -115,6 +116,10 @@ export default {
     };
   },
   computed: {
+    modelCount() {
+      const count = this.product.sizes[this.size];
+      return count !== undefined ? count : this.inventory;
+    },
     product() {
       return this.variants[this.selected];
     },
@@ -125,6 +130,7 @@ export default {
   methods: {
     updateProduct(index) {
       this.selected = index;
+      this.size = '';
     },
     addToCart() {
       this.cart.push(this.variants[this.selected]);
