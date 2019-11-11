@@ -9,7 +9,7 @@
 
       <div class="product-info">
         <h1>
-          {{ product.name }}
+          {{ name }}
           <span class="sale" v-show="product.onSale">On Sale!</span>
         </h1>
 
@@ -35,7 +35,7 @@
 
 
         <ul class="buttonList">
-          <li v-for="variant in variants"
+          <li v-for="(variant, index) in variants"
               :key="variant.id">
 
             <label class="colorBtn"
@@ -43,8 +43,8 @@
               <input type="radio"
                      name="color"
                      class="visuallyhidden"
-                     :checked="product.color === variant.color"
-                     @change="updateProduct(variant)">
+                     :checked="variant.color === product.color"
+                     @change="updateProduct(index)">
               <span class="colorBtn__inside" :style="{'background-color': variant.bgColor}"></span>
             </label>
           </li>
@@ -52,7 +52,7 @@
 
         <ul class="buttonList">
           <li
-            v-for="(val, key) in product.sizes"
+            v-for="(count, key) in product.sizes"
             :key="key">
             <label>
                <input type="radio" name="size" @change="size = key">
@@ -63,7 +63,7 @@
 
         <button class="toCart"
                 v-on:click="addToCart"
-                :disabled="!size || product.sizes[size] <= 0">
+                :disabled="!product.sizes[size]">
           Add to Cart
         </button>
 
@@ -85,10 +85,9 @@ export default {
   },
   data() {
     return {
-      details: ['80% cotton', '20% polyester'],
-      product: {
-        name: 'Socks',
-      },
+      details: ['80% cotton', '20% polyester', 'Unisex'],
+      name: 'Socks',
+      selected: 0,
       size: '',
       variants: [
         {
@@ -98,7 +97,7 @@ export default {
           imageSrc: greenSocks,
           onSale: true,
           sizes: {
-            S: 3, M: 7, L: 4, XL: 2,
+            XS: 0, S: 3, M: 7, L: 4, XL: 2,
           },
         },
         {
@@ -106,33 +105,29 @@ export default {
           color: 'dark blue',
           bgColor: '#405267',
           imageSrc: blueSocks,
-          sizes: {
-            XS: 2, S: 6, M: 15, XL: 9,
-          },
           onSale: false,
+          sizes: {
+            XS: 2, S: 6, M: 15, L: 0, XL: 9,
+          },
         },
       ],
-      defaultSizes: {
-        XS: 0, S: 0, M: 0, L: 0, XL: 0,
-      },
       cart: [],
     };
   },
   computed: {
+    product() {
+      return this.variants[this.selected];
+    },
     inventory() {
       return Object.keys(this.product.sizes).reduce((acc, key) => acc + this.product.sizes[key], 0);
     },
   },
-  created() {
-    this.updateProduct(this.variants[0]);
-  },
   methods: {
-    updateProduct(variant) {
-      this.product = { ...this.product, ...variant };
-      this.product.sizes = { ...this.defaultSizes, ...this.product.sizes };
+    updateProduct(index) {
+      this.selected = index;
     },
     addToCart() {
-      this.cart.push('');
+      this.cart.push(this.variants[this.selected]);
     },
   },
 };
