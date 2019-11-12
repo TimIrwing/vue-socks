@@ -95,7 +95,7 @@ export default {
   data() {
     return {
       selected: 0,
-      size: '',
+      size: null,
     };
   },
   computed: {
@@ -113,7 +113,7 @@ export default {
   methods: {
     updateProduct(index) {
       this.selected = index;
-      this.size = '';
+      this.size = null;
     },
   },
 };
