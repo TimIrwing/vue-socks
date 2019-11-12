@@ -59,7 +59,7 @@
           </label>
         </li>
       </ul>
-      <p class="itemsLeft">{{ modelCount }} pieces available</p>
+      <p class="itemsLeft" role="status" aria-live="polite">{{ modelCount }} pieces available</p>
 
       <button class="toCart" :disabled="!current.sizes[size]">
         Add to Cart
