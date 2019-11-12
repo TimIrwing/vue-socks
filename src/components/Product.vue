@@ -97,7 +97,7 @@ export default {
   computed: {
     modelCount() {
       const count = this.current.sizes[this.size];
-      return count !== undefined ? count : this.inventory;
+      return count === undefined ? this.inventory : count;
     },
 
     current() {
