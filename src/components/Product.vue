@@ -92,12 +92,10 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      selected: 0,
-      size: null,
-    };
-  },
+  data: () => ({
+    selected: 0,
+    size: null,
+  }),
   computed: {
     modelCount() {
       const count = this.current.sizes[this.size];

@@ -50,37 +50,35 @@ export default {
       }
     },
   },
-  data() {
-    return {
-      cart: {},
-      product: {
-        name: 'Socks',
-        details: ['80% cotton', '20% polyester', 'Unisex'],
-        variants: [
-          {
-            id: 2234,
-            colorDesc: 'mint green',
-            bgColor: '#359264',
-            imageSrc: greenSocks,
-            price: { default: '$4.99', sale: '$2.99' },
-            sizes: {
-              XS: 0, S: 3, M: 7, L: 4, XL: 2,
-            },
+  data: () => ({
+    cart: {},
+    product: {
+      name: 'Socks',
+      details: ['80% cotton', '20% polyester', 'Unisex'],
+      variants: [
+        {
+          id: 2234,
+          colorDesc: 'mint green',
+          bgColor: '#359264',
+          imageSrc: greenSocks,
+          price: { default: '$4.99', sale: '$2.99' },
+          sizes: {
+            XS: 0, S: 3, M: 7, L: 4, XL: 2,
           },
-          {
-            id: 2235,
-            colorDesc: 'dark blue',
-            bgColor: '#405267',
-            imageSrc: blueSocks,
-            price: { default: '$4.99' },
-            sizes: {
-              XS: 2, S: 6, M: 15, L: 0, XL: 9,
-            },
+        },
+        {
+          id: 2235,
+          colorDesc: 'dark blue',
+          bgColor: '#405267',
+          imageSrc: blueSocks,
+          price: { default: '$4.99' },
+          sizes: {
+            XS: 2, S: 6, M: 15, L: 0, XL: 9,
           },
-        ],
-      },
-    };
-  },
+        },
+      ],
+    },
+  }),
 };
 </script>
 
