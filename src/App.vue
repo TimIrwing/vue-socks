@@ -32,9 +32,9 @@ export default {
       const entry = this.cart[obj.id];
 
       if (entry === undefined) {
-        this.cart[obj.id] = {
+        this.$set(this.cart, obj.id, {
           obj, selectedSizes: { [size]: 1 },
-        };
+        });
       } else {
         this.incrementCart(obj.id, size);
       }
@@ -44,7 +44,7 @@ export default {
       const { selectedSizes } = this.cart[id];
 
       if (!selectedSizes[size]) {
-        selectedSizes[size] = 1;
+        this.$set(selectedSizes, size, 1);
       } else if (selectedSizes[size] < limit) {
         selectedSizes[size] += 1;
       }
