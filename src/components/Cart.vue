@@ -18,9 +18,8 @@ export default {
       let res = 0;
 
       Object.keys(this.cart).forEach((id) => {
-        const { selectedSizes } = this.cart[id];
-
-        res += Object.keys(selectedSizes).reduce((acc, key) => acc + selectedSizes[key], 0);
+        const sizes = this.cart[id].selectedSizes;
+        res += Object.keys(sizes).reduce((acc, key) => acc + sizes[key], 0);
       });
 
       return res;

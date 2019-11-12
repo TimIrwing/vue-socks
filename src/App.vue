@@ -27,29 +27,6 @@ export default {
     Cart,
     Product,
   },
-  methods: {
-    pushToCart(obj, size) {
-      const entry = this.cart[obj.id];
-
-      if (entry === undefined) {
-        this.$set(this.cart, obj.id, {
-          obj, selectedSizes: { [size]: 1 },
-        });
-      } else {
-        this.incrementCart(obj.id, size);
-      }
-    },
-    incrementCart(id, size) {
-      const limit = this.cart[id].obj.sizes[size];
-      const { selectedSizes } = this.cart[id];
-
-      if (!selectedSizes[size]) {
-        this.$set(selectedSizes, size, 1);
-      } else if (selectedSizes[size] < limit) {
-        selectedSizes[size] += 1;
-      }
-    },
-  },
   data: () => ({
     cart: {},
     product: {
@@ -79,39 +56,62 @@ export default {
       ],
     },
   }),
+  methods: {
+    pushToCart(obj, size) {
+      const entry = this.cart[obj.id];
+
+      if (entry === undefined) {
+        this.$set(this.cart, obj.id, {
+          obj, selectedSizes: { [size]: 1 },
+        });
+      } else {
+        this.incrementCart(obj.id, size);
+      }
+    },
+
+    incrementCart(id, size) {
+      const limit = this.cart[id].obj.sizes[size];
+      const { selectedSizes } = this.cart[id];
+
+      if (!selectedSizes[size]) {
+        this.$set(selectedSizes, size, 1);
+      } else if (selectedSizes[size] < limit) {
+        selectedSizes[size] += 1;
+      }
+    },
+  },
 };
 </script>
 
 <style>
   .nav {
-    background: linear-gradient(-90deg, #84CF6A, #16C0B0);
-    padding: 1em;
     display: flex;
     justify-content: center;
+    padding: 1em;
+    background: linear-gradient(-90deg, #84CF6A, #16C0B0);
   }
   .nav__content {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    width: 100%;
-    max-width: 1200px;
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   .title {
     margin: 0;
-    font-weight: 400;
-    font-size: 2.5em;
     color: #26455a;
+    font-size: 2.5em;
+    font-weight: 400;
   }
 
   body {
-    background-color: #fefefe;
+    margin: 0;
     font-family: tahoma, sans-serif;
     color:#233346;
-    margin: 0;
+    background-color: #fefefe;
   }
 </style>

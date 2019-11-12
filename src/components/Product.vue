@@ -8,7 +8,6 @@
     <div class="product-info">
       <h2>
         {{ product.name }}
-
       </h2>
 
       <h3>
@@ -25,15 +24,15 @@
       </h3>
 
       <p>
-          <span v-show="inventory > 25">
-            In Stock
-          </span>
+        <span v-show="inventory > 25">
+          In Stock
+        </span>
         <span v-show="inventory <= 25 && inventory > 0">
             Almost sold out!
           </span>
         <span v-show="inventory <= 0">
             Out of Stock
-          </span>
+        </span>
       </p>
 
       <ul>
@@ -42,7 +41,6 @@
           {{ detail }}
         </li>
       </ul>
-
 
       <ul class="buttonList">
         <li v-for="(variant, index) in product.variants"
@@ -72,7 +70,7 @@
           </label>
         </li>
       </ul>
-      <p class="itemsLeft" role="status" aria-live="polite">{{ modelCount }} pieces available</p>
+      <p class="itemsLeft" role="status" aria-live="polite">{{ modelCount }} pairs available</p>
 
       <button class="toCart"
               :disabled="!current.sizes[size]"
@@ -101,9 +99,11 @@ export default {
       const count = this.current.sizes[this.size];
       return count !== undefined ? count : this.inventory;
     },
+
     current() {
       return this.product.variants[this.selected];
     },
+
     inventory() {
       return Object.keys(this.current.sizes).reduce((acc, key) => acc + this.current.sizes[key], 0);
     },
@@ -121,12 +121,12 @@ export default {
   @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
   .product {
-    font-size: 1.2em;
     display: flex;
     padding: 2em;
 
-    color: #233346;
     font-family: 'Lato', Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    color: #233346;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -164,9 +164,9 @@ export default {
   }
   .price_inactive {
     position: relative;
-    color: #798c98;
     font-size: .8em;
     font-style: italic;
+    color: #798c98;
   }
   .price_inactive::after {
     content: '';
@@ -179,11 +179,11 @@ export default {
   }
 
   .sale {
-    color: #fefefe;
-    background-color: #F2341B;
-    font-weight: 400;
     padding: .1em .3em .1em .3em;
     border-radius: .2em;
+    font-weight: 400;
+    color: #fefefe;
+    background-color: #F2341B;
   }
 
   .buttonList {
@@ -197,11 +197,11 @@ export default {
   }
 
   .squareButton {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    box-sizing: border-box;
     width: 3em;
     height: 3em;
     border: 1px solid #3336;
@@ -231,25 +231,25 @@ export default {
 
   .sizeBtn__text {
     display: flex;
-    width: 100%;
-    height: 100%;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
   }
 
   input[type=radio]:checked + .sizeBtn__text {
-    background-color: #4fc88c77;
     font-size: 1.3em;
+    background-color: #4fc88c77;
   }
 
   .visuallyhidden {
-    position: absolute;
     display: block;
-    overflow: hidden;
     height: 1px; width: 1px;
+    padding: 0; border: 0;
+    position: absolute;
+    overflow: hidden;
     clip: rect(0 0 0 0);
     left: -9999px;
-    padding: 0; border: 0;
   }
 
   .itemsLeft {
@@ -258,14 +258,14 @@ export default {
 
   .toCart {
     margin-top: 30px;
+    padding: .8em 1.2em;
     border: none;
     border-radius: 2px;
-    background-color: #4e7891;
-    letter-spacing: .05em;
     font-family: inherit;
-    color: #fefefe;
-    padding: .8em 1.2em;
     font-size: 14px;
+    letter-spacing: .05em;
+    color: #fefefe;
+    background-color: #4e7891;
     cursor: pointer;
   }
   .toCart:focus {
