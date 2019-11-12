@@ -6,11 +6,11 @@
           <h1 class="title">Vue Socks</h1>
         </li>
         <li>
-          <cart :cart="cart"/>
+          <Cart :cart="cart"/>
         </li>
       </ul>
     </nav>
-    <Product :product="product"/>
+    <Product :product="product" @add-to-cart="pushToCart"/>
   </div>
 </template>
 
@@ -27,8 +27,32 @@ export default {
     Cart,
     Product,
   },
+  methods: {
+    pushToCart(obj, size) {
+      const entry = this.cart[obj.id];
+
+      if (entry === undefined) {
+        this.cart[obj.id] = {
+          obj, selectedSizes: { [size]: 1 },
+        };
+      } else {
+        this.incrementCart(obj.id, size);
+      }
+    },
+    incrementCart(id, size) {
+      const limit = this.cart[id].obj.sizes[size];
+      const { selectedSizes } = this.cart[id];
+
+      if (!selectedSizes[size]) {
+        selectedSizes[size] = 1;
+      } else if (selectedSizes[size] < limit) {
+        selectedSizes[size] += 1;
+      }
+    },
+  },
   data() {
     return {
+      cart: {},
       product: {
         name: 'Socks',
         details: ['80% cotton', '20% polyester', 'Unisex'],
@@ -38,7 +62,7 @@ export default {
             colorDesc: 'mint green',
             bgColor: '#359264',
             imageSrc: greenSocks,
-            onSale: true,
+            price: { default: '$4.99', sale: '$2.99' },
             sizes: {
               XS: 0, S: 3, M: 7, L: 4, XL: 2,
             },
@@ -48,7 +72,7 @@ export default {
             colorDesc: 'dark blue',
             bgColor: '#405267',
             imageSrc: blueSocks,
-            onSale: false,
+            price: { default: '$4.99' },
             sizes: {
               XS: 2, S: 6, M: 15, L: 0, XL: 9,
             },
