@@ -71,12 +71,12 @@ export default {
 
     incrementCart(id, size) {
       const limit = this.cart[id].obj.sizes[size];
-      const { selectedSizes } = this.cart[id];
+      const sizes = this.cart[id].selectedSizes;
 
-      if (!selectedSizes[size]) {
-        this.$set(selectedSizes, size, 1);
-      } else if (selectedSizes[size] < limit) {
-        selectedSizes[size] += 1;
+      if (!sizes[size]) {
+        this.$set(sizes, size, 1);
+      } else if (sizes[size] < limit) {
+        sizes[size] += 1;
       }
     },
   },
