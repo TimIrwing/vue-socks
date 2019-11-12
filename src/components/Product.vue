@@ -6,10 +6,23 @@
     </div>
 
     <div class="product-info">
-      <h1>
+      <h2>
         {{ product.name }}
-        <span class="sale" v-show="current.onSale">On Sale!</span>
-      </h1>
+
+      </h2>
+
+      <h3>
+        <span aria-label="price"
+              class="price"
+              :class="{price_inactive: current.price.sale}">
+          {{current.price.default}}
+        </span>
+        <span aria-label="price on sale"
+              class="price" v-show="current.price.sale">
+          {{current.price.sale}}
+        </span>
+        <span class="sale" v-show="current.price.sale">On Sale!</span>
+      </h3>
 
       <p>
           <span v-show="inventory > 25">
@@ -61,7 +74,9 @@
       </ul>
       <p class="itemsLeft" role="status" aria-live="polite">{{ modelCount }} pieces available</p>
 
-      <button class="toCart" :disabled="!current.sizes[size]">
+      <button class="toCart"
+              :disabled="!current.sizes[size]"
+              @click="$emit('add-to-cart', current)">
         Add to Cart
       </button>
     </div>
@@ -146,10 +161,28 @@ export default {
     }
   }
 
+  .price{
+    margin-right: .5em;
+  }
+  .price_inactive {
+    position: relative;
+    color: #798c98;
+    font-size: .8em;
+    font-style: italic;
+  }
+  .price_inactive::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 110%;
+    height: 10%;
+    background-color: #798c98;
+  }
+
   .sale {
     color: #fefefe;
     background-color: #F2341B;
-    font-size: .8em;
     font-weight: 400;
     padding: .1em .3em .1em .3em;
     border-radius: .2em;
@@ -235,6 +268,7 @@ export default {
     color: #fefefe;
     padding: .8em 1.2em;
     font-size: 14px;
+    cursor: pointer;
   }
   .toCart:focus {
     outline: none;
