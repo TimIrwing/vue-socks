@@ -240,6 +240,9 @@ export default {
     outline: none;
     box-shadow: 0 0 .3em #222;
   }
+  .toCart::-moz-focus-inner {
+    border: 0;
+  }
   .toCart:disabled {
     background-color: #9b9b9b;
   }
