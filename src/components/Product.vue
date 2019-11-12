@@ -76,7 +76,7 @@
 
       <button class="toCart"
               :disabled="!current.sizes[size]"
-              @click="$emit('add-to-cart', current)">
+              @click="$emit('add-to-cart', current, size)">
         Add to Cart
       </button>
     </div>
