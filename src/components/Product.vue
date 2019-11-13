@@ -58,7 +58,7 @@
       </ul>
 
       <ul class="buttonList">
-        <li v-for="(_, key) in current.sizes"
+        <li v-for="key in product.defaultSizes"
             :key="key">
           <label class="squareButton squareButton_small">
             <input type="radio"
@@ -66,7 +66,7 @@
                    class="visuallyhidden"
                    @change="size = key"
                    :checked="size === key"
-                   :disabled="current.sizes[key] === 0">
+                   :disabled="!current.sizes[key] || current.sizes[key] === 0">
             <span class="sizeBtn__text">{{ key }}</span>
           </label>
         </li>
