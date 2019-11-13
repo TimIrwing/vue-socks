@@ -2,12 +2,12 @@
   <section class="product">
     <div class="product-image">
       <img :src="current.imageSrc"
-           alt="Socks">
+           :alt="desc">
     </div>
 
     <div class="product-info">
       <h2>
-        {{ product.name }}
+        {{ current.name }}
       </h2>
 
       <h3>
@@ -106,6 +106,10 @@ export default {
 
     inventory() {
       return Object.keys(this.current.sizes).reduce((acc, key) => acc + this.current.sizes[key], 0);
+    },
+
+    desc() {
+      return `${this.current.colorDesc} ${this.current.name}`;
     },
   },
   methods: {
