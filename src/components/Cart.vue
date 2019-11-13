@@ -104,6 +104,7 @@ export default {
     border-radius: .5em;
     list-style: none;
     background-color: #fefefe;
+    box-shadow: 0 12px 4px -10px #3336;
 
     /* transition  requirement */
     transform-origin: top right;
