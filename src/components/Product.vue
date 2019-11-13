@@ -198,8 +198,9 @@ export default {
 
   .buttonList {
     display: flex;
+    flex-wrap: wrap;
     padding: 0;
-    margin: 1em 0;
+    margin: 0;
     list-style: none;
   }
   .buttonList > *:not(:last-child) {
@@ -214,6 +215,7 @@ export default {
     overflow: hidden;
     width: 3em;
     height: 3em;
+    margin: .5em 0;
     transition: box-shadow .1s;
     border: 1px solid #3336;
     border-radius: .5em;
