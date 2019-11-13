@@ -3,6 +3,7 @@
     <button type="button" class="cartBtn" @click="cartOpen = !cartOpen">
       <span class="cartBtn__textContainer">
         <span class="cartBtn__text"
+              role="status"
               aria-label="total count"
               aria-live="polite">
           {{totalCount}}
@@ -12,7 +13,7 @@
     </button>
     <transition name="appear">
       <form class="cartList__container" v-show="cartOpen" @submit.prevent="">
-        <ul class="cartList" aria-live="polite">
+        <ul class="cartList" aria-live="polite" role="region">
           <li v-show="cartEmpty" class="cartList__empty">Cart is empty</li>
 
           <template v-for="(product, key) in cart">
