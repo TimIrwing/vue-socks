@@ -8,14 +8,24 @@
     </button>
     <transition name="appear">
       <ul class="cartList" v-show="cartOpen">
+        <li class="cartList__item" v-for="(product, key) in cart" :key="key">
+          <CartItem :product="product"/>
+
+          <div class="cartList__delimiter"></div>
+        </li>
       </ul>
     </transition>
   </div>
 </template>
 
 <script>
+import CartItem from './CartItem.vue';
+
 export default {
   name: 'Cart',
+  components: {
+    CartItem,
+  },
   props: {
     cart: {
       type: Object,
@@ -108,6 +118,17 @@ export default {
 
     /* transition  requirement */
     transform-origin: top right;
+  }
+
+  .cartList__delimiter {
+    height: 1px;
+    margin: 1em 0;
+    background-image:
+        linear-gradient(to right, transparent, #3336 15%, #3336 85%, transparent);
+  }
+
+  .cartList__item:last-child > .cartList__delimiter {
+    display: none;
   }
 
   /* transition */
