@@ -113,7 +113,7 @@ export default {
   /* transition */
   .appear-enter,
   .appear-leave-to {
-    top: 50%; right: 50%;
+    top: 100%; right: 50%;
     transform: scale(0);
   }
   .appear-enter-active,

@@ -237,7 +237,7 @@ export default {
     align-items: center;
     width: 100%;
     height: 100%;
-    transition: font-size .1s;
+    transition: font-size .1s, background-color .2s;
   }
 
   input[type=radio]:checked + .sizeBtn__text {
@@ -279,7 +279,7 @@ export default {
   .toCart::-moz-focus-inner {
     border: 0;
   }
-  .toCart:active {
+  .toCart:active:not(:disabled) {
     transform: translateY(.2em);
   }
   .toCart:disabled {
