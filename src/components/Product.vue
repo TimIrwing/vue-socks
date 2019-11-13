@@ -65,7 +65,8 @@
                    name="size"
                    class="visuallyhidden"
                    @change="size = key"
-                   :checked="size === key">
+                   :checked="size === key"
+                   :disabled="current.sizes[key] === 0">
             <span class="sizeBtn__text">{{ key }}</span>
           </label>
         </li>
@@ -234,7 +235,6 @@ export default {
     height: 50%;
     border-radius: .333em;
   }
-
   input[type=radio]:checked + .colorBtn__inside {
     width: 75%;
     height: 75%;
@@ -248,10 +248,13 @@ export default {
     height: 100%;
     transition: font-size .1s, background-color .2s;
   }
-
   input[type=radio]:checked + .sizeBtn__text {
     font-size: 1.3em;
     background-color: #4fc88c77;
+  }
+  input[type=radio]:disabled + .sizeBtn__text {
+    font-size: 1em;
+    background-color: #3333;
   }
 
   .visuallyhidden {
