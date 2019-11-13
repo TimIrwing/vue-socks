@@ -17,10 +17,12 @@
                 v-if="product.obj !== undefined">
               <CartItem :product="product" @close="$delete(cart, $event)"/>
 
-           <div class="cartList__delimiter"></div>
-         </li>
-       </template>
-      </ul>
+              <div class="cartList__delimiter"></div>
+            </li>
+          </template>
+        </ul>
+        <button v-show="!cartEmpty" class="toCheckout">Proceed to Checkout</button>
+      </form>
     </transition>
   </div>
 </template>
@@ -161,5 +163,30 @@ export default {
   .appear-enter-active,
   .appear-leave-active{
     transition: .2s ease-in-out;
+  }
+
+  .toCheckout {
+    width: 80%;
+    margin: 0 10% 0 10%;
+    padding: .8em 1.2em;
+    border: none;
+    border-radius: 2px;
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: .05em;
+    color: #fefefe;
+    background-color: #4e7891;
+    cursor: pointer;
+    transition: transform .1s;
+  }
+  .toCheckout:focus {
+    outline: none;
+    box-shadow: 0 0 .3em #222;
+  }
+  .toCheckout::-moz-focus-inner {
+    border: 0;
+  }
+  .toCheckout:active:not(:disabled) {
+    transform: translateY(.2em);
   }
 </style>
