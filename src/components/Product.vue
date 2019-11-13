@@ -7,7 +7,7 @@
 
     <div class="product-info">
       <h2>
-        {{ current.name }}
+        {{ capitalize(current.name) }}
       </h2>
 
       <h3>
@@ -82,6 +82,8 @@
 </template>
 
 <script>
+import { capitalize } from './helpers';
+
 export default {
   name: 'Product',
   props: {
@@ -109,10 +111,13 @@ export default {
     },
 
     desc() {
-      return `${this.current.colorDesc} ${this.current.name}`;
+      return `${capitalize(this.current.name)} — ${capitalize(this.current.colorDesc)}`;
     },
   },
   methods: {
+    capitalize(str) {
+      return capitalize((str));
+    },
     updateProduct(index) {
       this.selected = index;
       this.size = null;
