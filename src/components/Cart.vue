@@ -149,8 +149,11 @@ export default {
         linear-gradient(to right, transparent, #3336 15%, #3336 85%, transparent);
   }
 
-  .cartList__item:last-child > .cartList__delimiter {
-    display: none;
+  .cartList__empty {
+    width: max-content;
+    padding: 0 .5em;
+    font-size: 1.2em;
+    opacity: .75;
   }
 
   /* transition */
