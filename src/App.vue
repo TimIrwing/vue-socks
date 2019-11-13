@@ -61,7 +61,7 @@ export default {
     pushToCart(obj, size) {
       const entry = this.cart[obj.id];
 
-      if (entry === undefined) {
+      if (entry === undefined || entry.obj === undefined) {
         this.$set(this.cart, obj.id, {
           obj, selectedSizes: { [size]: 1 },
         });

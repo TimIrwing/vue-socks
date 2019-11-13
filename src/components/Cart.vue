@@ -8,11 +8,15 @@
     </button>
     <transition name="appear">
       <ul class="cartList" v-show="cartOpen">
-        <li class="cartList__item" v-for="(product, key) in cart" :key="key">
-          <CartItem :product="product"/>
+       <template v-for="(product, key) in cart">
+         <li class="cartList__item"
+             :key="key"
+             v-if="product.obj !== undefined">
+           <CartItem :product="product" @close="cart[$event] = {}"/>
 
-          <div class="cartList__delimiter"></div>
-        </li>
+           <div class="cartList__delimiter"></div>
+         </li>
+       </template>
       </ul>
     </transition>
   </div>
@@ -40,8 +44,10 @@ export default {
       let res = 0;
 
       Object.keys(this.cart).forEach((id) => {
-        const sizes = this.cart[id].selectedSizes;
-        res += Object.keys(sizes).reduce((acc, key) => acc + sizes[key], 0);
+        if (this.cart[id].obj !== undefined) {
+          const sizes = this.cart[id].selectedSizes;
+          res += Object.keys(sizes).reduce((acc, key) => acc + sizes[key], 0);
+        }
       });
 
       return res;
