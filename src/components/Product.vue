@@ -169,7 +169,7 @@ export default {
     }
   }
 
-  .price{
+  .price {
     margin-right: .5em;
   }
   .price_inactive {
