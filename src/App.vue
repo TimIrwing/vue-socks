@@ -30,11 +30,11 @@ export default {
   data: () => ({
     cart: {},
     product: {
-      name: 'Socks',
       details: ['80% cotton', '20% polyester', 'Unisex'],
       variants: [
         {
           id: 2234,
+          name: 'Socks',
           colorDesc: 'mint green',
           bgColor: '#359264',
           imageSrc: greenSocks,
@@ -45,6 +45,7 @@ export default {
         },
         {
           id: 2235,
+          name: 'Socks',
           colorDesc: 'dark blue',
           bgColor: '#405267',
           imageSrc: blueSocks,
