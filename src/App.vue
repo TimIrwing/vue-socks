@@ -40,7 +40,7 @@ export default {
           imageSrc: greenSocks,
           price: { default: '$4.99', sale: '$2.99' },
           sizes: {
-            XS: 0, S: 3, M: 7, L: 4, XL: 2,
+            XS: 13, S: 0, M: 0, L: 1, XL: 4,
           },
         },
         {
@@ -51,7 +51,7 @@ export default {
           imageSrc: blueSocks,
           price: { default: '$4.99' },
           sizes: {
-            XS: 2, S: 6, M: 15, L: 0, XL: 9,
+            XS: 16, S: 6, M: 4, L: 0, XL: 12,
           },
         },
       ],
