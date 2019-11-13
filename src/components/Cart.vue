@@ -135,6 +135,7 @@ export default {
   .appear-leave-to {
     top: 100%; right: 50%;
     transform: scale(0);
+    opacity: 0;
   }
   .appear-enter-active,
   .appear-leave-active{
