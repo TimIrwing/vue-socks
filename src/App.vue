@@ -30,6 +30,7 @@ export default {
   data: () => ({
     cart: {},
     product: {
+      defaultSizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
       details: ['80% cotton', '20% polyester', 'Unisex'],
       variants: [
         {
@@ -40,7 +41,7 @@ export default {
           imageSrc: greenSocks,
           price: { default: '$4.99', sale: '$2.99' },
           sizes: {
-            XS: 13, S: 0, M: 0, L: 1, XL: 4,
+            XS: 13, L: 1, XL: 4,
           },
         },
         {
@@ -51,7 +52,7 @@ export default {
           imageSrc: blueSocks,
           price: { default: '$4.99' },
           sizes: {
-            XS: 16, S: 6, M: 4, L: 0, XL: 12,
+            XS: 16, S: 6, M: 4, XL: 12,
           },
         },
       ],
@@ -61,9 +62,13 @@ export default {
     pushToCart(obj, size) {
       const entry = this.cart[obj.id];
 
-      if (entry === undefined || entry.obj === undefined) {
+      if (entry === undefined) {
+        const sizes = {};
+
+        this.product.defaultSizes.forEach((key) => { sizes[key] = key === size ? 1 : 0; });
+
         this.$set(this.cart, obj.id, {
-          obj, selectedSizes: { [size]: 1 },
+          obj, selectedSizes: sizes,
         });
       } else {
         this.incrementCart(obj.id, size);
@@ -74,9 +79,7 @@ export default {
       const limit = this.cart[id].obj.sizes[size];
       const sizes = this.cart[id].selectedSizes;
 
-      if (!sizes[size]) {
-        this.$set(sizes, size, 1);
-      } else if (sizes[size] < limit) {
+      if (sizes[size] < limit) {
         sizes[size] += 1;
       }
     },
