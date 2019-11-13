@@ -204,6 +204,7 @@ export default {
     overflow: hidden;
     width: 3em;
     height: 3em;
+    transition: box-shadow .1s;
     border: 1px solid #3336;
     border-radius: .5em;
     cursor: pointer;
@@ -219,6 +220,7 @@ export default {
   }
 
   .colorBtn__inside {
+    transition: width .1s, height .1s;
     width: 50%;
     height: 50%;
     border-radius: .333em;
@@ -235,6 +237,7 @@ export default {
     align-items: center;
     width: 100%;
     height: 100%;
+    transition: font-size .1s;
   }
 
   input[type=radio]:checked + .sizeBtn__text {
@@ -267,6 +270,7 @@ export default {
     color: #fefefe;
     background-color: #4e7891;
     cursor: pointer;
+    transition: transform .1s;
   }
   .toCart:focus {
     outline: none;
@@ -274,6 +278,9 @@ export default {
   }
   .toCart::-moz-focus-inner {
     border: 0;
+  }
+  .toCart:active {
+    transform: translateY(.2em);
   }
   .toCart:disabled {
     background-color: #9b9b9b;
