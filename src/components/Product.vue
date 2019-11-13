@@ -111,7 +111,7 @@ export default {
     },
 
     desc() {
-      return `${capitalize(this.current.name)} — ${capitalize(this.current.colorDesc)}`;
+      return `${capitalize(this.current.name)} - ${capitalize(this.current.colorDesc)}`;
     },
   },
   methods: {
