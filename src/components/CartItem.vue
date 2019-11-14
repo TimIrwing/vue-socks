@@ -136,10 +136,6 @@ export default {
     font-family: inherit;
     background: #fefefe;
   }
-  .sizeList__input:disabled {
-    color: transparent;
-    background-color: #3333;
-  }
   .sizeList__availability {
     margin-left: 1em;
     font-size: .7em;
