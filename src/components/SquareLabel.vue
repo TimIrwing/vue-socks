@@ -22,7 +22,7 @@ export default {
     margin: .5em 0;
     transition: box-shadow .1s;
     border: 1px solid #3336;
-    border-radius: .5em;
+    border-radius: 15%;
     cursor: pointer;
   }
   :focus-within {
