@@ -58,6 +58,12 @@ export default {
       ],
     },
   }),
+  created() {
+    this.product.variants.forEach(({ imageSrc }) => {
+      const img = new Image();
+      img.src = imageSrc;
+    });
+  },
   methods: {
     pushToCart(obj, size) {
       const entry = this.cart[obj.id];
