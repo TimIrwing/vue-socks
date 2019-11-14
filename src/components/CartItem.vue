@@ -9,13 +9,24 @@
         <ul class="sizeList">
           <template v-for="(_, size) in product.selectedSizes">
             <li class="sizeList__item" v-if="notZero(product.selectedSizes[size])">
-              <label class="sizeList__label">
+              <label class="sizeList__label" :for="`${obj.id}.${size}`">
                 <span class="sizeList__text">{{size}}</span>
 
+                <VueButton type="button"
+                           class="sizeList__decrement"
+                           aria-label="decrement item quantity"
+                           @click="addToSize(size, -1)">‹</VueButton>
+
                 <SizeInput :name="`${obj.id}.${size}`"
+                           :id="`${obj.id}.${size}`"
                            v-model="product.selectedSizes[size]"
                            min="0" :max="obj.sizes[size] || 0"
                            @blur="format(size)"/>
+
+                <VueButton type="button"
+                           class="sizeList__increment"
+                           aria-label="increment item quantity"
+                           @click="addToSize(size, 1)">›</VueButton>
 
                 <span class="sizeList__availability">
                   {{obj.sizes[size]}} items available
@@ -36,10 +47,11 @@
 <script>
 import { capitalize } from './helpers';
 import SizeInput from './SizeInput.vue';
+import VueButton from './VueButton.vue';
 
 export default {
   name: 'CartItem',
-  components: { SizeInput },
+  components: { SizeInput, VueButton },
   props: {
     product: {
       type: Object,
@@ -77,6 +89,11 @@ export default {
 
     notZero(val) {
       return !!Number(val);
+    },
+
+    addToSize(size, num) {
+      this.product.selectedSizes[size] = Number(this.product.selectedSizes[size]) + num;
+      this.format(size);
     },
   },
 };
@@ -154,6 +171,29 @@ export default {
   }
   .sizeList__item:not(:last-child) {
     margin-bottom: .2em;
+  }
+
+  .sizeList__decrement,
+  .sizeList__increment {
+    width: 1em;
+    height: 1.333em;
+    font-weight: 600;
+    font-size: 1.5em;
+    line-height: 1;
+    text-align: center;
+    color: #3338;
+    background: none;
+  }
+  .sizeList__decrement:focus,
+  .sizeList__increment:focus {
+    text-shadow: 0 2px 2px #3336;
+    box-shadow: none;
+  }
+  .sizeList__decrement:active:not(:disabled)  {
+    transform: translateX(-1px);
+  }
+  .sizeList__increment:active:not(:disabled)  {
+    transform: translateX(1px);
   }
 
   .closeBtn {
