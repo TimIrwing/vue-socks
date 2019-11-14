@@ -128,14 +128,11 @@ export default {
 </script>
 
 <style scoped>
-  @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-
   .product {
     display: flex;
     justify-content: center;
     padding: 2em;
 
-    font-family: 'Lato', Helvetica, Arial, sans-serif;
     font-size: 1.2em;
     color: #233346;
     -webkit-font-smoothing: antialiased;

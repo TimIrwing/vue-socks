@@ -94,6 +94,8 @@ export default {
 </script>
 
 <style>
+  @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
   .nav {
     display: flex;
     justify-content: center;
@@ -120,7 +122,7 @@ export default {
 
   body {
     margin: 0;
-    font-family: tahoma, sans-serif;
+    font-family: 'Lato', Helvetica, Arial, sans-serif;
     color:#233346;
     background-color: #fefefe;
   }
