@@ -28,10 +28,10 @@
           In Stock
         </span>
         <span v-show="inventory <= 25 && inventory > 0">
-            Almost sold out!
-          </span>
+          Almost sold out!
+        </span>
         <span v-show="inventory <= 0">
-            Out of Stock
+          Out of Stock
         </span>
       </p>
 
@@ -45,22 +45,21 @@
       <ul class="buttonList">
         <li v-for="(variant, index) in product.variants"
             :key="variant.id">
-          <label class="squareButton"
-                 :aria-label="variant.colorDesc">
+          <SquareLabel :aria-label="variant.colorDesc">
             <input type="radio"
                    name="color"
                    class="visuallyhidden"
                    :checked="index === 0"
                    @change="updateProduct(index)">
             <span class="colorBtn__inside" :style="{'background-color': variant.bgColor}"></span>
-          </label>
+          </SquareLabel>
         </li>
       </ul>
 
       <ul class="buttonList">
         <li v-for="key in product.defaultSizes"
             :key="key">
-          <label class="squareButton squareButton_small">
+          <SquareLabel class="squareButton_small">
             <input type="radio"
                    name="size"
                    class="visuallyhidden"
@@ -68,25 +67,28 @@
                    :checked="size === key"
                    :disabled="!current.sizes[key] || current.sizes[key] === 0">
             <span class="sizeBtn__text">{{ key }}</span>
-          </label>
+          </SquareLabel>
         </li>
       </ul>
       <p class="itemsLeft" role="status" aria-live="polite">{{ modelCount }} pairs available</p>
 
-      <button class="toCart"
+      <VueButton class="toCart"
               :disabled="!current.sizes[size]"
               @click="$emit('add-to-cart', current, size)">
         Add to Cart
-      </button>
+      </VueButton>
     </div>
   </section>
 </template>
 
 <script>
+import VueButton from './VueButton.vue';
+import SquareLabel from './SquareLabel.vue';
 import { capitalize } from './helpers';
 
 export default {
   name: 'Product',
+  components: { VueButton, SquareLabel },
   props: {
     product: {
       type: Object,
@@ -119,6 +121,7 @@ export default {
     capitalize(str) {
       return capitalize((str));
     },
+
     updateProduct(index) {
       this.selected = index;
       this.size = null;
@@ -206,25 +209,6 @@ export default {
     margin-right: 1em;
   }
 
-  .squareButton {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    width: 3em;
-    height: 3em;
-    margin: .5em 0;
-    transition: box-shadow .1s;
-    border: 1px solid #3336;
-    border-radius: .5em;
-    cursor: pointer;
-  }
-  .squareButton:focus-within {
-    border-color: #4fc88c;
-    box-shadow: 0 0 0 3px #4fc88c;
-  }
-
   .squareButton_small {
     width: 2em;
     height: 2em;
@@ -242,19 +226,16 @@ export default {
   }
 
   .sizeBtn__text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    line-height: 2em;
+    text-align: center;
     width: 100%;
     height: 100%;
     transition: font-size .1s, background-color .2s;
   }
   input[type=radio]:checked + .sizeBtn__text {
-    font-size: 1.3em;
     background-color: #4fc88c77;
   }
   input[type=radio]:disabled + .sizeBtn__text {
-    font-size: 1em;
     background-color: #3333;
   }
 
@@ -275,28 +256,6 @@ export default {
   .toCart {
     margin-top: 30px;
     padding: .8em 1.2em;
-    border: none;
-    border-radius: 2px;
-    font-family: inherit;
-    font-size: 14px;
-    letter-spacing: .05em;
-    color: #fefefe;
-    background-color: #4e7891;
-    cursor: pointer;
-    transition: transform .1s;
-  }
-  .toCart:focus {
-    outline: none;
-    box-shadow: 0 0 .3em #222;
-  }
-  .toCart::-moz-focus-inner {
-    border: 0;
-  }
-  .toCart:active:not(:disabled) {
-    transform: translateY(.2em);
-  }
-  .toCart:disabled {
-    background-color: #9b9b9b;
   }
   @media all and (max-width: 650px) {
     .toCart {
