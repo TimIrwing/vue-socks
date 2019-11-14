@@ -8,7 +8,7 @@
 
         <ul class="sizeList">
           <template v-for="(_, size) in product.selectedSizes">
-            <li class="sizeList__item" v-if="product.selectedSizes[size]">
+            <li :key="size" class="sizeList__item" v-if="product.selectedSizes[size]">
               <label class="sizeList__label" :for="`${obj.id}.${size}`">
                 <span class="sizeList__text">{{size}}</span>
 
