@@ -29,7 +29,7 @@
                            @click="addToSize(size, 1)"/>
 
                 <span class="sizeList__availability">
-                  {{obj.sizes[size]}} items available
+                  {{obj.sizes[size]}} item<span v-show="obj.sizes[size] > 1">s</span> available
                 </span>
               </label>
             </li>
@@ -156,11 +156,12 @@ export default {
     display: inline-flex;
     justify-content: center;
     width: 3em;
+    font-size: 1.1em;
   }
 
   .sizeList__availability {
     margin-left: 1em;
-    font-size: .7em;
+    font-size: .8em;
     font-weight: 600;
     opacity: .75;
   }

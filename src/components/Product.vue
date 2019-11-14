@@ -70,7 +70,9 @@
           </SquareLabel>
         </li>
       </ul>
-      <p class="itemsLeft" role="status" aria-live="polite">{{ modelCount }} pairs available</p>
+      <p class="itemsLeft" role="status" aria-live="polite">
+        {{ modelCount }} pair<span v-show="modelCount > 1">s</span> available
+      </p>
 
       <VueButton class="toCart"
               :disabled="!current.sizes[size]"
