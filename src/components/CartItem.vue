@@ -37,10 +37,10 @@
         </ul>
       </div>
     </div>
-    <button class="closeBtn"
+    <VueButton class="closeBtn"
             type="button"
             @click="$emit('close', obj.id)"
-            aria-label="delete this item from the cart">✖</button>
+            aria-label="delete this item from the cart">✖</VueButton>
   </div>
 </template>
 
@@ -191,9 +191,6 @@ export default {
   .sizeList__decrement {
     transform: rotate(180deg);
   }
-  .sizeList__decrement:focus,
-  .sizeList__increment:focus {
-  }
   .sizeList__decrement:active:not(:disabled)  {
     transform: rotate(180deg) translateX(1px);
   }
@@ -204,22 +201,14 @@ export default {
   .closeBtn {
     position: absolute;
     top: 0; right: 0;
-    width: 1.25em;
-    height: 1.25em;
+    width: 1em;
+    height: 1em;
     font-size: 2em;
-    line-height: 1.25em;
+    line-height: 1;
     color: #d72c11;
-    padding: 0;
-    border: none;
     background: none;
-    cursor: pointer;
-    border-radius: .2em;
   }
   .closeBtn:focus {
     box-shadow: 0 0 2px 2px #d72c11;
-  }
-  .closeBtn::-moz-focus-inner {
-    padding: 0;
-    border: 0;
   }
 </style>
