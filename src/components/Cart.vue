@@ -117,7 +117,7 @@ export default {
     width: max-content;
     padding: 0;
     margin: 0;
-    max-width: 80vw;
+    max-width: 85vw;
     list-style: none;
   }
 
