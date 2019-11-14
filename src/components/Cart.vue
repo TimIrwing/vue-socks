@@ -27,7 +27,7 @@
             </li>
           </template>
         </ul>
-        <button v-show="!cartEmpty" class="toCheckout">Proceed to Checkout</button>
+        <VueButton v-show="!cartEmpty" class="toCheckout">Proceed to Checkout</VueButton>
       </form>
     </transition>
   </div>
@@ -35,10 +35,12 @@
 
 <script>
 import CartItem from './CartItem.vue';
+import VueButton from './VueButton.vue';
 
 export default {
   name: 'Cart',
   components: {
+    VueButton,
     CartItem,
   },
   props: {
@@ -177,24 +179,6 @@ export default {
     width: 80%;
     margin: 0 10% 0 10%;
     padding: .8em 1.2em;
-    border: none;
-    border-radius: 2px;
-    font-family: inherit;
-    font-size: 14px;
-    letter-spacing: .05em;
-    color: #fefefe;
-    background-color: #4e7891;
-    cursor: pointer;
-    transition: transform .1s;
-  }
-  .toCheckout:focus {
-    outline: none;
-    box-shadow: 0 0 .3em #222;
-  }
-  .toCheckout::-moz-focus-inner {
-    border: 0;
-  }
-  .toCheckout:active:not(:disabled) {
-    transform: translateY(.2em);
+    font-size: 1.1em;
   }
 </style>
