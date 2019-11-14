@@ -132,6 +132,7 @@ export default {
 
   .product {
     display: flex;
+    justify-content: center;
     padding: 2em;
 
     font-family: 'Lato', Helvetica, Arial, sans-serif;
@@ -140,32 +141,31 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  @media all and (max-width: 650px) {
+  @media all and (max-width: 768px) {
     .product {
+      align-items: center;
       flex-direction: column;
     }
   }
 
-  .product-image,
+  .product-image {
+    width: 33.33vw;
+    padding: 1em;
+  }
   .product-info {
-    width: 50%;
+    padding: 1em;
+    width: max-content;
   }
   img {
     display: block;
-    width: 66.666%;
-    margin: 2.5em auto;
+    width: 100%;
     border: 2px solid #d8d8d8;
     border-radius: 4px;
     box-shadow: 0 10px 4px -8px #d8d8d8;
   }
-  @media all and (max-width: 650px) {
-    .product-image,
-    .product-info {
-      width: 100%;
-    }
-    img {
-      margin-top: 1em;
-      margin-bottom: 1em;
+  @media all and (max-width: 768px) {
+    .product-image {
+      width: 75%;
     }
   }
 
