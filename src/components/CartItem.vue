@@ -15,7 +15,9 @@
                 <VueButton type="button"
                            class="sizeList__decrement"
                            aria-label="decrement item quantity"
-                           @click="addToSize(size, -1)"/>
+                           @click="addToSize(size, -1)">
+                  <img src="../assets/arrow.svg" alt="arrow facing right" aria-hidden="true">
+                </VueButton>
 
                 <SizeInput :name="`${obj.id}.${size}`"
                            :id="`${obj.id}.${size}`"
@@ -26,7 +28,9 @@
                 <VueButton type="button"
                            class="sizeList__increment"
                            aria-label="increment item quantity"
-                           @click="addToSize(size, 1)"/>
+                           @click="addToSize(size, 1)">
+                  <img src="../assets/arrow.svg" alt="arrow facing right" aria-hidden="true">
+                </VueButton>
 
                 <span class="sizeList__availability">
                   {{obj.sizes[size]}} item<span v-show="obj.sizes[size] > 1">s</span> available
@@ -177,25 +181,23 @@ export default {
 
   .sizeList__decrement,
   .sizeList__increment {
-    width: 1em;
-    height: 1em;
-    margin: .2em;
-    font-weight: 600;
-    font-size: 1.5em;
-    line-height: 1;
-    text-align: center;
-    color: #3338;
-    background: no-repeat center url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 492.004 492.004'%3E%3Cpath fill='%233336' d='M382.678 226.804L163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z'/%3E%3C/svg%3E");
-    background-size: 75%;
+    width: 2em;
+    height: 2em;
+    background: none;
+    padding: .5em;
   }
-  .sizeList__decrement {
+  .sizeList__decrement:focus,
+  .sizeList__increment:focus {
+    box-shadow: 0 4px 0 -2px #3336;
+  }
+  .sizeList__decrement > img {
     transform: rotate(180deg);
   }
   .sizeList__decrement:active:not(:disabled)  {
-    transform: rotate(180deg) translateX(1px);
+    transform: translateX(-2px);
   }
   .sizeList__increment:active:not(:disabled)  {
-    transform: translateX(1px);
+    transform: translateX(2px);
   }
 
   .closeBtn {
