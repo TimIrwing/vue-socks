@@ -8,7 +8,7 @@
 
         <ul class="sizeList">
           <template v-for="(_, size) in product.selectedSizes">
-            <li class="sizeList__item" v-if="product.selectedSizes[size]">
+            <li class="sizeList__item" v-if="notZero(product.selectedSizes[size])">
               <label class="sizeList__label">
                 <span class="sizeList__text">{{size}}</span>
 
@@ -27,7 +27,8 @@
       </div>
     </div>
     <button class="closeBtn"
-            type="button" @click="$emit('close', obj.id)"
+            type="button"
+            @click="$emit('close', obj.id)"
             aria-label="delete this item from the cart">✖</button>
   </div>
 </template>
@@ -54,6 +55,14 @@ export default {
       return `${capitalize(this.obj.name)} - ${capitalize(this.obj.colorDesc)}`;
     },
   },
+  beforeUpdate() {
+    const somethingSelected = Object.entries(this.product.selectedSizes)
+      .some(([, val]) => this.notZero(val));
+
+    if (!somethingSelected) {
+      this.$emit('close', this.obj.id);
+    }
+  },
   methods: {
     format(size) {
       const limit = this.obj.sizes[size];
@@ -64,6 +73,10 @@ export default {
       } else if (sizes[size] > limit) {
         sizes[size] = limit;
       }
+    },
+
+    notZero(val) {
+      return !!Number(val);
     },
   },
 };
