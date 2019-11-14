@@ -1,6 +1,8 @@
 <template>
   <input type="number"
-         class="sizeInput" :value="value" @input="$emit('input', $event.target.value)">
+         class="sizeInput"
+         :value="value"
+         @input="$emit('input', $event.target.value)">
 </template>
 
 <script>
