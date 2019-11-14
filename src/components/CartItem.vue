@@ -12,12 +12,10 @@
               <label class="sizeList__label">
                 <span class="sizeList__text">{{size}}</span>
 
-                <input type="number"
-                       class="sizeList__input"
-                       :name="`${obj.id}.${size}`"
-                       v-model="product.selectedSizes[size]"
-                       min="0" :max="obj.sizes[size] || 0"
-                       @blur="format(size)">
+                <SizeInput :name="`${obj.id}.${size}`"
+                           v-model="product.selectedSizes[size]"
+                           min="0" :max="obj.sizes[size] || 0"
+                           @blur="format(size)"/>
 
                 <span class="sizeList__availability">
                   {{obj.sizes[size]}} items available
@@ -36,9 +34,11 @@
 
 <script>
 import { capitalize } from './helpers';
+import SizeInput from './SizeInput.vue';
 
 export default {
   name: 'CartItem',
+  components: { SizeInput },
   props: {
     product: {
       type: Object,
@@ -126,16 +126,7 @@ export default {
     justify-content: center;
     width: 3em;
   }
-  .sizeList__input {
-    box-sizing: border-box;
-    height: 2em;
-    width: 4em;
-    padding: .25em .25em .25em .5em;
-    border: 1px solid #3336;
-    border-radius: .2em;
-    font-family: inherit;
-    background: #fefefe;
-  }
+
   .sizeList__availability {
     margin-left: 1em;
     font-size: .7em;
