@@ -1,11 +1,12 @@
 <template>
   <input type="number"
-         class="sizeInput">
+         class="sizeInput" :value="value" @input="$emit('input', $event.target.value)">
 </template>
 
 <script>
 export default {
   name: 'SizeInput',
+  props: ['value'],
 };
 </script>
 
