@@ -147,7 +147,8 @@ export default {
 
   .product-image {
     width: 33.33vw;
-    padding: 1em;
+    padding-top: 2em;
+    padding-right: 2em;
   }
   .product-info {
     padding: 1em;
@@ -162,6 +163,7 @@ export default {
   }
   @media all and (max-width: 768px) {
     .product-image {
+      padding: 1em;
       width: 75%;
     }
   }
