@@ -7,26 +7,24 @@
         <p class="product__desc">{{desc}}</p>
 
         <ul class="sizeList">
-          <li class="sizeList__item" v-for="(_, size) in product.selectedSizes">
-            <label class="sizeList__label">
-              <span class="sizeList__text">{{size}}</span>
+          <template v-for="(_, size) in product.selectedSizes">
+            <li class="sizeList__item" v-if="product.selectedSizes[size]">
+              <label class="sizeList__label">
+                <span class="sizeList__text">{{size}}</span>
 
-              <input type="number"
-                     class="sizeList__input"
-                     :name="`${obj.id}.${size}`"
-                     :disabled="!sizeAvailable(size)"
-                     v-model="product.selectedSizes[size]"
-                     min="0" :max="obj.sizes[size] || 0"
-                     @blur="format(size)">
+                <input type="number"
+                       class="sizeList__input"
+                       :name="`${obj.id}.${size}`"
+                       v-model="product.selectedSizes[size]"
+                       min="0" :max="obj.sizes[size] || 0"
+                       @blur="format(size)">
 
-              <span class="sizeList__availability" v-if="sizeAvailable(size)">
-                {{obj.sizes[size]}} items available
-              </span>
-              <span class="sizeList__availability" v-else>
-                Currently unavailable
-              </span>
-            </label>
-          </li>
+                <span class="sizeList__availability">
+                  {{obj.sizes[size]}} items available
+                </span>
+              </label>
+            </li>
+          </template>
         </ul>
       </div>
     </div>
@@ -57,10 +55,6 @@ export default {
     },
   },
   methods: {
-    sizeAvailable(size) {
-      return !!this.obj.sizes[size];
-    },
-
     format(size) {
       const limit = this.obj.sizes[size];
       const sizes = this.product.selectedSizes;
