@@ -218,7 +218,7 @@ export default {
     transition: width .1s, height .1s;
     width: 50%;
     height: 50%;
-    border-radius: .333em;
+    border-radius: 15%;
   }
   input[type=radio]:checked + .colorBtn__inside {
     width: 75%;
