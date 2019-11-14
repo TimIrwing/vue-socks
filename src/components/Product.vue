@@ -230,7 +230,7 @@ export default {
     text-align: center;
     width: 100%;
     height: 100%;
-    transition: font-size .1s, background-color .2s;
+    transition: background-color .2s;
   }
   input[type=radio]:checked + .sizeBtn__text {
     background-color: #4fc88c77;
