@@ -183,13 +183,15 @@ export default {
 
   .sizeList__decrement,
   .sizeList__increment {
-    width: 2em;
-    height: 2em;
+    width: 1.75em;
+    height: 1.75em;
+    padding: .25em;
+    margin: .25em;
     background: none;
   }
   .sizeList__decrement:focus,
   .sizeList__increment:focus {
-    box-shadow: 0 4px 0 -2px #3336;
+    box-shadow: 0 0 0 1px #3336;
   }
   .sizeList__decrement > img {
     transform: rotate(180deg);
