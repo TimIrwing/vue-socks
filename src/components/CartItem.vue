@@ -8,25 +8,25 @@
 
         <ul class="sizeList">
           <template v-for="(_, size) in product.selectedSizes">
-            <li class="sizeList__item" v-if="notZero(product.selectedSizes[size])">
+            <li class="sizeList__item" v-if="product.selectedSizes[size]">
               <label class="sizeList__label" :for="`${obj.id}.${size}`">
                 <span class="sizeList__text">{{size}}</span>
 
                 <VueButton type="button"
                            class="sizeList__decrement"
                            aria-label="decrement item quantity"
-                           @click="addToSize(size, -1)">‹</VueButton>
+                           @click="addToSize(size, -1)"/>
 
                 <SizeInput :name="`${obj.id}.${size}`"
                            :id="`${obj.id}.${size}`"
-                           v-model="product.selectedSizes[size]"
                            min="0" :max="obj.sizes[size] || 0"
-                           @blur="format(size)"/>
+                           v-model="product.selectedSizes[size]"
+                           @input="format(size)"/>
 
                 <VueButton type="button"
                            class="sizeList__increment"
                            aria-label="increment item quantity"
-                           @click="addToSize(size, 1)">›</VueButton>
+                           @click="addToSize(size, 1)"/>
 
                 <span class="sizeList__availability">
                   {{obj.sizes[size]}} items available
@@ -69,7 +69,7 @@ export default {
   },
   beforeUpdate() {
     const somethingSelected = Object.entries(this.product.selectedSizes)
-      .some(([, val]) => this.notZero(val));
+      .some(([, val]) => val);
 
     if (!somethingSelected) {
       this.$emit('close', this.obj.id);
@@ -83,16 +83,17 @@ export default {
       if (sizes[size] < 0) {
         sizes[size] = 0;
       } else if (sizes[size] > limit) {
-        sizes[size] = limit;
+        if (typeof sizes[size] === 'string') {
+          setTimeout(() => { sizes[size] = limit; }, 0);
+        } else {
+          sizes[size] = limit;
+        }
       }
     },
 
-    notZero(val) {
-      return !!Number(val);
-    },
 
     addToSize(size, num) {
-      this.product.selectedSizes[size] = Number(this.product.selectedSizes[size]) + num;
+      this.product.selectedSizes[size] += num;
       this.format(size);
     },
   },
@@ -170,27 +171,30 @@ export default {
     align-items: center;
   }
   .sizeList__item:not(:last-child) {
-    margin-bottom: .2em;
+    margin-bottom: .5em;
   }
 
   .sizeList__decrement,
   .sizeList__increment {
     width: 1em;
-    height: 1.333em;
+    height: 1em;
+    margin: .2em;
     font-weight: 600;
     font-size: 1.5em;
     line-height: 1;
     text-align: center;
     color: #3338;
-    background: none;
+    background: no-repeat center url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 492.004 492.004'%3E%3Cpath fill='%233336' d='M382.678 226.804L163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z'/%3E%3C/svg%3E");
+    background-size: 75%;
+  }
+  .sizeList__decrement {
+    transform: rotate(180deg);
   }
   .sizeList__decrement:focus,
   .sizeList__increment:focus {
-    text-shadow: 0 2px 2px #3336;
-    box-shadow: none;
   }
   .sizeList__decrement:active:not(:disabled)  {
-    transform: translateX(-1px);
+    transform: rotate(180deg) translateX(1px);
   }
   .sizeList__increment:active:not(:disabled)  {
     transform: translateX(1px);
