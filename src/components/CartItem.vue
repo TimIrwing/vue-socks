@@ -44,7 +44,9 @@
     <VueButton class="closeBtn"
             type="button"
             @click="$emit('close', obj.id)"
-            aria-label="delete this item from the cart">✖</VueButton>
+            aria-label="delete this item from the cart">
+      <img src="../assets/trash-bin.svg" alt="trash bin" aria-hidden="true">
+    </VueButton>
   </div>
 </template>
 
@@ -184,7 +186,6 @@ export default {
     width: 2em;
     height: 2em;
     background: none;
-    padding: .5em;
   }
   .sizeList__decrement:focus,
   .sizeList__increment:focus {
@@ -203,14 +204,14 @@ export default {
   .closeBtn {
     position: absolute;
     top: 0; right: 0;
-    width: 1em;
-    height: 1em;
-    font-size: 2em;
+    width: 2.5em;
+    height: 2.5em;
+    padding: .4em;
     line-height: 1;
     color: #d72c11;
     background: none;
   }
   .closeBtn:focus {
-    box-shadow: 0 0 2px 2px #d72c11;
+    box-shadow: 0 0 0 1px #d72c11;
   }
 </style>
